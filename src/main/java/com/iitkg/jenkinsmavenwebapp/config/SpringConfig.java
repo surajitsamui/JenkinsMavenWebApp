@@ -4,11 +4,17 @@
  * and open the template in the editor.
  */
 package com.iitkg.jenkinsmavenwebapp.config;
+import com.iitkg.jenkinsmavenwebapp.dao.UserDAO;
+import com.iitkg.jenkinsmavenwebapp.dao.UserDAOImpl;
 import java.util.Set;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.ws.rs.core.Application;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -45,5 +51,26 @@ public class SpringConfig extends Application implements WebMvcConfigurer {
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
+    }
+    
+    @Bean
+    public DataSource getDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/springbootdb");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");         
+        return dataSource;
+    }  
+    
+    @Bean
+    public JdbcTemplate getJdbcTemplate() throws NamingException {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        return jdbcTemplate;
+    }
+    
+    @Bean
+    public UserDAO getUserDAO() {
+        return new UserDAOImpl(getDataSource());
     }
 }
