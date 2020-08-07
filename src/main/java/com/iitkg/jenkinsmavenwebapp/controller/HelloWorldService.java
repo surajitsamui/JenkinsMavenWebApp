@@ -18,7 +18,7 @@ public class HelloWorldService {
 	@GET
 	@Path("/{param}")
 	public Response getMsg(@PathParam("param") String msg) {
-		String output = "Jersey say : " + msg;
+		String output = "Jersey say 20202 : " + msg;
 		logger.debug("Welcome to mkyong.com...debug");
 		logger.info("Welcome to mkyong.com...info");
 		logger.error("Welcome to mkyong.com...error");
