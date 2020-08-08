@@ -12,8 +12,6 @@ package com.iitkg.jenkinsmavenwebapp.dao;
 import com.iitkg.jenkinsmavenwebapp.model.User;
 import java.util.List;
  
-
- 
 public interface UserDAO {
     public List<User> list();
 }
