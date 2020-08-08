@@ -65,6 +65,7 @@ public class SpringConfig extends Application implements WebMvcConfigurer {
     
     @Bean
     public JdbcTemplate getJdbcTemplate() throws NamingException {
+        System.out.println("added ssh key in github");
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         return jdbcTemplate;
     }
