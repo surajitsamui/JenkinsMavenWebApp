@@ -1,6 +1,7 @@
 package com.iitkg.jenkinsmavenwebapp.controller;
 
 import com.iitkg.jenkinsmavenwebapp.model.Employee;
+import com.iitkg.jenkinsmavenwebapp.model.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-	@RequestMapping(value = "/employee", method = RequestMethod.GET)
+    @RequestMapping(value = "/employee", method = RequestMethod.GET)
 	public Employee firstPage() {
 
 		Employee emp = new Employee();
@@ -19,6 +20,5 @@ public class TestController {
 		emp.setSalary(3000);
 
 		return emp;
-	}
-
+    }
 }
