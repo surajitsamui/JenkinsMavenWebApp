@@ -24,7 +24,7 @@ node{
 '''
    }*/
    stage('Deploy to Tomcat'){
-     bat "copy target\\JenkinsMavenWebApp-1.0-SNAPSHOT.war \"${tomcatWeb}\\JenkinsMavenWebApp-1.0-SNAPSHOT.war\""
+     bat "copy target\\JenkinsMavenWebApp-1.0-SNAPSHOT.war \"${tomcatWeb}\\JenkinsWebApp.war\""
    }
       stage ('Start Tomcat Server') {
          sleep(time:5,unit:"SECONDS") 
