@@ -6,20 +6,22 @@
 package com.iitkg.jenkinsmavenwebapp.config;
 import com.iitkg.jenkinsmavenwebapp.dao.UserDAO;
 import com.iitkg.jenkinsmavenwebapp.dao.UserDAOImpl;
+import java.io.IOException;
 import java.util.Set;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.ws.rs.core.Application;
+import org.springframework.jdbc.core.JdbcTemplate; 
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.JstlView;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @Configuration
@@ -44,6 +46,14 @@ public class SpringConfig extends Application implements WebMvcConfigurer {
     	resources.add(com.iitkg.jenkinsmavenwebapp.controller.HelloWorldService.class);
     }
 
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver getResolver() throws IOException {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        // no limit
+        resolver.setMaxUploadSize(-1);
+        return resolver;
+    }
+    
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
